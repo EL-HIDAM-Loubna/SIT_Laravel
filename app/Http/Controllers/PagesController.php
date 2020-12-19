@@ -11,10 +11,20 @@ class PagesController extends Controller
              'Go to the market',
              'Go to work',
              'Go to the concert'];
-             
+
     return view('welcome')->with([
         'foo' => 'foobar',
         'tasks' => $tasks
     ]);
     }
+
+    public function about(){
+        return view('about');
+    }
+
+    public function contact(){
+        return view('contact');
+    }
+
+
 }
