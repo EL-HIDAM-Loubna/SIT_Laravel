@@ -4,17 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
         <title>@yield('title')</title>
+         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
     </head>
     <body>
 
+       <div class="container">
+           @yield('content')
+       </div>
         
-        <ul>
-            <li><a href="/"> Home </a></li>
-            <li><a href="/about"> About Us </a></li>
-            <li><a href="/contact"> Contact </a></li>
-        </ul>
-        @yield('content')
     </body>
 </html>
