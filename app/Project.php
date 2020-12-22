@@ -11,4 +11,8 @@ class Project extends Model
    ];
 
 //    protected $guarded =[];    ==> No protection
+  public function tasks()
+  {
+      return $this->hasMany(Task::class);
+  }
 }

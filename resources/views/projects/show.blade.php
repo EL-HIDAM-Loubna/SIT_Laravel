@@ -5,6 +5,17 @@
    <div class="content">
         {{$project->description}}
    </div>
+   @if ($project->tasks->count())
+      <div>
+         <ul>
+            @foreach ($project->tasks as $task )
+
+               <li>{{ $task->description }}</li>    
+            @endforeach
+         </ul>
+      </div>   
+   @endif
+   
    <p>
       <a href="/projects/{{$project->id}}/edit">Edit</a>
    </p>
