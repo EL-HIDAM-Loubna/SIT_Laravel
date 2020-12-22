@@ -6,8 +6,12 @@
 
 
         <title>@yield('title')</title>
-         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <style>
+            .is-complete{
+                text-decoration: line-through;
+            }
+        </style> 
     </head>
     <body>
 
