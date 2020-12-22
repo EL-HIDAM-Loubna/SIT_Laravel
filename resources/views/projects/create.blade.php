@@ -1,34 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create</title>
-</head>
-<body>
-    <h1>Create a new Project</h1>
+@extends('layout')
+
+@section('content')
+    <h1 class="title">Create a new Project</h1>
     <form  method="POST" action="/projects">
 
     
-     {{ csrf_field() }}   {{-- ( cross-site request forgery)  are a type of malicious 
-                            exploit whereby unauthorized commands are performed on behalf 
-                            of an authenticated user. Laravel automatically generates a CSRF
-                            "token" for each active user session managed by the application.
-                            This token is used to verify that the authenticated user is the
-                            one actually making the requests to the application --}}
+     {{ csrf_field() }}   
+        <div class="field">
+            <label class="label" for="title"> Title </label>
+            <div class="control">
+                <input type="text"class="input {{ $errors->has('title') ? 'is-danger':''}}" name="title" placeholder="Project Title" value='{{ old('title') }}'>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label" for="description"> Description </label>
 
+            <div class="control">
+                <textarea name="description" class="textarea {{ $errors->has('description') ? 'is-danger':''}}" placeholder="Project description" >{{ old('description') }}</textarea>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button type="submit" class="button is-link"> Create Project</button>
+            </div>
+        </div>
 
-        <div>
-            <input type="text" name="title" placeholder="Project Title">
-        </div>
-        <div>
-            <textarea name="description" placeholder="Project description"></textarea>
-        </div>
-        <div>
-            <button type="submit"> Create Project</button>
-        </div>
+        @if ($errors->any())
+            <div class="notification is-danger">
+                <ul>
+                    @foreach ($errors->all() as $error )
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>     
+            </div>
+        @endif
+
+        
     </form>
     
-</body>
-</html>
+@endsection
