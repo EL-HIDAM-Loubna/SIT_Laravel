@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+
+
+
+app()->singleton('App\Services\Twitter', function(){
+        return new  App\Services\Twitter("lobnaloubna");
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +21,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','PagesController@home');
+Route::get('/',function(){
+    dd(app('App\Example'));
+    return view('welcome');
+});
 
 /*
 GET /projects  (index)
