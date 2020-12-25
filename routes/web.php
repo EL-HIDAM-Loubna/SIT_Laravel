@@ -1,14 +1,13 @@
 <?php
 
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Route;
+use App\Services\Twitter;
 
 
 
 
 
-app()->singleton('App\Services\Twitter', function(){
-        return new  App\Services\Twitter("lobnaloubna");
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +20,12 @@ app()->singleton('App\Services\Twitter', function(){
 |
 */
 
-Route::get('/',function(){
-    dd(app('App\Example'));
+// Route::get('/',function(Twitter $twitter){
+//     dd($twitter);
+//     return view('welcome');
+// });
+Route::get('/',function(UserRepository $users){
+    dd($users);
     return view('welcome');
 });
 
