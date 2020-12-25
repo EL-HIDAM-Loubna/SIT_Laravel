@@ -20,14 +20,14 @@ use App\Services\Twitter;
 |
 */
 
-// Route::get('/',function(Twitter $twitter){
-//     dd($twitter);
-//     return view('welcome');
-// });
-Route::get('/',function(UserRepository $users){
-    dd($users);
+Route::get('/',function(Twitter $twitter){
+    dd($twitter);
     return view('welcome');
 });
+// Route::get('/',function(UserRepository $users){
+//     dd($users);
+//     return view('welcome');
+// });
 
 /*
 GET /projects  (index)
