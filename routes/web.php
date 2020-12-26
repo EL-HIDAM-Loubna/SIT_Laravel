@@ -34,7 +34,7 @@ PATCH /projects/1 (update)
 DELETE /projects/1 (destroy)
 */
 
-Route::resource('/projects', 'ProjectsController');
+Route::resource('/projects', 'ProjectsController')->middleware('can:update,project');  // ==> method 9
 
 Route::post('/projects/{project}/tasks', 'ProjectTasksController@store');
 

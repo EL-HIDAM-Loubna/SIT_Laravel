@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 
+
 use Illuminate\Http\Request;
 
 
@@ -38,6 +39,19 @@ class ProjectsController extends Controller
     }
 
     public function show(Project $project){
+
+        // abort_unless(auth()->user()->owns($project), 403);            // ==> method 1
+        // abort_if($project->owner_id !== auth()->id(),403);            // ==> method 2
+        // if(\Gate::denies('update',$project)){                         // ==> method 3
+        //     abort(403);
+        // }
+        // abort_if(\Gate::denies('update', $project), 403);             // ==> method 4
+        // abort_unless(\Gate::allows('update', $project), 403);         // ==> method 5
+        // abort_unless(auth()->user()->can('update',$project), 403);    // ==> method 6
+        // abort_if(auth()->user()->cannot('update', $project), 403);    // ==> method 7
+        // $this->authorize('update', $project);                         // ==> method 8
+                                                                         // ==> method 9 --> routes/web.php
+                                                                        
         return view('projects.show', compact('project'));
 
     }
