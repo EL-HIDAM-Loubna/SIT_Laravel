@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
-   protected $fillable =[
-       'title', 'description'
-   ];
+//    protected $fillable =[
+//        'title', 'description'
+//    ];
 
-//    protected $guarded =[];    ==> No protection
+   protected $guarded =[];   // ==> No protection
 
 
   public function tasks()

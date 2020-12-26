@@ -20,14 +20,9 @@ use App\Services\Twitter;
 |
 */
 
-Route::get('/',function(Twitter $twitter){
-    dd($twitter);
+Route::get('/',function(){
     return view('welcome');
 });
-// Route::get('/',function(UserRepository $users){
-//     dd($users);
-//     return view('welcome');
-// });
 
 /*
 GET /projects  (index)
@@ -47,3 +42,7 @@ Route::post('/completed-tasks/{task}','CompletedTasksController@store');
 
 Route::delete('/completed-tasks/{task}', 'CompletedTasksController@destroy');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
