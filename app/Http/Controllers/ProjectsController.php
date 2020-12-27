@@ -29,7 +29,7 @@ class ProjectsController extends Controller
         $attributes['owner_id'] = auth()->id();
         $project = Project::create($attributes);
 
-        Mail::to('loubna@example.com')->send(
+        Mail::to($project->owner->email)->send(
             new ProjectCreated($project)
         );
         return redirect('/projects');
