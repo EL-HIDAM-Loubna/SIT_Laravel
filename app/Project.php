@@ -4,19 +4,27 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Mail\ProjectCreated;
+use Illuminate\Support\Facades\Mail;
+
 class Project extends Model
 {
-//    protected $fillable =[
-//        'title', 'description'
-//    ];
 
-   protected $guarded =[];   // ==> No protection
-
+   protected $guarded =[];  
+   public static function boot()
+   {
+      parent::boot();
+      static::created(function($project){     // updated or deleted 
+        Mail::to($project->owner->email)->send(
+            new ProjectCreated($project)
+        );
+      });
+   }
    public function owner()
    {
        return $this->belongsTo(User::class);
    }
-   
+
   public function tasks()
   {
       return $this->hasMany(Task::class);
