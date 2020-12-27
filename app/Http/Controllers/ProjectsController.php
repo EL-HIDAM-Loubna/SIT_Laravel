@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Project;
-
-
+use App\Mail\ProjectCreated;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 
@@ -16,6 +16,12 @@ class ProjectsController extends Controller
    }
     public function index(){
         $projects = Project::where('owner_id', auth()->id())->get();
+        // dump($projects);
+        // cache()->rememberForever('stats', function(){
+        //      return ['lessons' => 1300, 'hours' => 50000, 'series' => 100];
+        // });
+        $stats = cache()->get('stats');
+        dump($stats);
         return view('projects.index', compact('projects'));
     }
 
@@ -31,27 +37,16 @@ class ProjectsController extends Controller
         ]);
 
         $attributes['owner_id'] = auth()->id();
-        Project::create($attributes);
+        $project = Project::create($attributes);
 
-        // Project::create($attributes + ['owner_id' => auth()->id()]);
-        
+        Mail::to('loubna@example.com')->send(
+            new ProjectCreated($project)
+        );
         return redirect('/projects');
     }
 
     public function show(Project $project){
 
-        // abort_unless(auth()->user()->owns($project), 403);            // ==> method 1
-        // abort_if($project->owner_id !== auth()->id(),403);            // ==> method 2
-        // if(\Gate::denies('update',$project)){                         // ==> method 3
-        //     abort(403);
-        // }
-        // abort_if(\Gate::denies('update', $project), 403);             // ==> method 4
-        // abort_unless(\Gate::allows('update', $project), 403);         // ==> method 5
-        // abort_unless(auth()->user()->can('update',$project), 403);    // ==> method 6
-        // abort_if(auth()->user()->cannot('update', $project), 403);    // ==> method 7
-        // $this->authorize('update', $project);                         // ==> method 8
-                                                                         // ==> method 9 --> routes/web.php
-                                                                        
         return view('projects.show', compact('project'));
 
     }
